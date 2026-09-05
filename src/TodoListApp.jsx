@@ -60,13 +60,13 @@ export function TodoListApp() {
     setTasks(tasks.filter((_, idx) => idx !== i));
   }
 
-  const undoDelete = () => {
+  const _undoDelete = () => {
     if (!deletedStack.length) return;
     const last = deletedStack.pop();
     setTasks([...tasks, last]);
   };
 
-  const fullUndo = () => {
+  const _fullUndo = () => {
     if (history.length <= 1) return;
     const prev = history[history.length - 2];
     setTasks(prev);
@@ -81,7 +81,7 @@ export function TodoListApp() {
   };
 
   const editTask = (index, text) => setTasks(tasks.map((t, i) => (i === index ? { ...t, text } : t)));
-  const clearCompleted = () => setTasks(tasks.filter((t) => !t.completed));
+  const _clearCompleted = () => setTasks(tasks.filter((t) => !t.completed));
   const deleteSelected = () => { setTasks(tasks.filter((t) => !selected.includes(t.id))); setSelected([]); };
   const completeSelected = () => { setTasks(tasks.map((t) => selected.includes(t.id) ? { ...t, completed: true } : t)); setSelected([]); };
   const onDragEnd = (result) => {
@@ -108,7 +108,7 @@ export function TodoListApp() {
   // --- JSX ---
   return (
     <div className={`${darkMode ? "bg-gray-900 text-gray-200" : "bg-gradient-to-br from-blue-50 to-purple-100 text-gray-900"} h-screen p-6 flex flex-col transition-colors duration-500`}>
-      
+
       {/* Header + Dark Mode Toggle */}
       <div className="flex justify-between items-center mb-4">
         <h1 className={`text-4xl font-extrabold ${darkMode ? "text-yellow-300" : "text-blue-700"}`}>✨ My Todo App</h1>
